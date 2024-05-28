@@ -9,26 +9,26 @@
 
 ## About The Project
 
-# Clone the repository
+Clone the repository
 git clone https://github.com/username/repository-name.git
 cd repository-name
 
-# Install Composer dependencies
+Install Composer dependencies
 composer install
 
-# Set up environment variables
+Set up environment variables
 cp .env.example .env
-# Edit .env file as needed
+Edit .env file as needed
 
-# Generate application key
+Generate application key
 php artisan key:generate
 
-# Run database migrations
+Run database migrations
 php artisan migrate
 
-# Access the storage folder publically
+Access the storage folder publically
 php artisan storage:link
 
-# Start the development server
+Start the development server
 php artisan serve
 
