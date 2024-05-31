@@ -18,11 +18,9 @@ use Illuminate\Support\Facades\Storage;
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-users';
-
     protected static ?string $navigationGroup = 'Accesses';
-
+    protected static ?int $navigationSort = 12;
 
     public static function form(Form $form): Form
     {

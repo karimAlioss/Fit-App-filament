@@ -15,13 +15,10 @@ use App\Enums\AmoeType;
 class ProjectResource extends Resource
 {
     protected static ?string $model = Project::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-inbox-stack';
-
     protected static ?string $navigationGroup = 'Managements';
-
     protected static ?string $recordTitleAttribute = 'titre';
-
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
@@ -80,6 +77,10 @@ class ProjectResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->groups([
+                Tables\Grouping\Group::make('statu.tag')
+                    ->collapsible()
+            ])
             ->columns([
                 Tables\Columns\TextColumn::make('titre')
                     ->sortable()

@@ -13,10 +13,9 @@ use Filament\Tables\Table;
 class StatuResource extends Resource
 {
     protected static ?string $model = Statu::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-tag';
-
     protected static ?string $navigationGroup = 'Settings';
+    protected static ?int $navigationSort = 9;
 
 
     public static function form(Form $form): Form

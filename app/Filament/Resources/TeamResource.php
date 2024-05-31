@@ -13,11 +13,9 @@ use Filament\Tables\Table;
 class TeamResource extends Resource
 {
     protected static ?string $model = Team::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
-
     protected static ?string $navigationGroup = 'Accesses';
-
+    protected static ?int $navigationSort = 11;
 
     public static function form(Form $form): Form
     {

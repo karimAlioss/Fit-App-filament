@@ -13,10 +13,9 @@ use Filament\Tables\Table;
 class RoleResource extends Resource
 {
     protected static ?string $model = Role::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-key';
-
     protected static ?string $navigationGroup = 'Settings';
+    protected static ?int $navigationSort = 10;
 
 
     public static function form(Form $form): Form

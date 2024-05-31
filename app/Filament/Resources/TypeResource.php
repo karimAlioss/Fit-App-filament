@@ -13,10 +13,9 @@ use Filament\Tables\Table;
 class TypeResource extends Resource
 {
     protected static ?string $model = Type::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-lifebuoy';
-
     protected static ?string $navigationGroup = 'Divers';
+    protected static ?int $navigationSort = 8;
 
     public static function form(Form $form): Form
     {

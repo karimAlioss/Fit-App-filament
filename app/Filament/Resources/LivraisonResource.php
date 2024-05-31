@@ -13,13 +13,10 @@ use Filament\Tables\Table;
 class LivraisonResource extends Resource
 {
     protected static ?string $model = Livraison::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-rocket-launch';
-
     protected static ?string $navigationGroup = 'Managements';
-
     protected static ?string $recordTitleAttribute = 'titre';
-
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {
@@ -50,6 +47,10 @@ class LivraisonResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->groups([
+                Tables\Grouping\Group::make('statu.tag')
+                    ->collapsible()
+            ])
             ->columns([
                 Tables\Columns\TextColumn::make('reference')
                     ->searchable()

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Policies\MethodPolicy;
 use App\Policies\PrestatairePolicy;
+use App\Policies\ProjectPolicy;
 use App\Policies\RolePolicy;
 use App\Policies\SponsorPolicy;
 use App\Policies\StatuPolicy;
@@ -27,7 +28,8 @@ class AuthServiceProvider extends ServiceProvider
         TypePolicy::class,
         SponsorPolicy::class,
         PrestatairePolicy::class,
-        MethodPolicy::class
+        MethodPolicy::class,
+        ProjectPolicy::class
     ];
 
     /**

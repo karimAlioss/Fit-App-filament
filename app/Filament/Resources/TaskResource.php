@@ -13,12 +13,10 @@ use Filament\Tables\Table;
 class TaskResource extends Resource
 {
     protected static ?string $model = Task::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-list-bullet';
-
     protected static ?string $navigationGroup = 'Managements';
-
     protected static ?string $recordTitleAttribute = 'titre';
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {
@@ -49,6 +47,10 @@ class TaskResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->groups([
+                Tables\Grouping\Group::make('statu.tag')
+                    ->collapsible()
+            ])
             ->columns([
                 Tables\Columns\TextColumn::make('titre')
                     ->searchable()
