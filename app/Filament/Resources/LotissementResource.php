@@ -3,21 +3,20 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\LotissementResource\Pages;
-use App\Filament\Resources\LotissementResource\RelationManagers;
 use App\Models\Lotissement;
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class LotissementResource extends Resource
 {
     protected static ?string $model = Lotissement::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-swatch';
+
+    protected static ?string $navigationGroup = 'Managements';
+
 
     public static function form(Form $form): Form
     {

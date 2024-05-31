@@ -3,15 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\SponsorResource\Pages;
-use App\Filament\Resources\SponsorResource\RelationManagers;
 use App\Models\Sponsor;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class SponsorResource extends Resource
 {
@@ -19,13 +16,16 @@ class SponsorResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
+    protected static ?string $navigationGroup = 'Divers';
+
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Section::make([
                     Forms\Components\TextInput::make('tag')
-                        ->required(),    
+                        ->required(),
                 ])
             ]);
     }

@@ -3,15 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PrestataireResource\Pages;
-use App\Filament\Resources\PrestataireResource\RelationManagers;
 use App\Models\Prestataire;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PrestataireResource extends Resource
 {
@@ -19,13 +16,16 @@ class PrestataireResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-identification';
 
+    protected static ?string $navigationGroup = 'Divers';
+
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Section::make([
                     Forms\Components\TextInput::make('tag')
-                        ->required(),    
+                        ->required(),
                 ])
             ]);
     }

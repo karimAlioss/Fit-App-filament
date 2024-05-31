@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\StatuResource\Pages;
 
 use App\Filament\Resources\StatuResource;
-use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateStatu extends CreateRecord

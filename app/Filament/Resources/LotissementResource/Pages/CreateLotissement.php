@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\LotissementResource\Pages;
 
 use App\Filament\Resources\LotissementResource;
-use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateLotissement extends CreateRecord

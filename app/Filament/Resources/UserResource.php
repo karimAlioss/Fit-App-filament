@@ -12,12 +12,17 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
+
+    protected static ?string $navigationGroup = 'Accesses';
+
 
     public static function form(Form $form): Form
     {
@@ -44,8 +49,10 @@ class UserResource extends Resource
                         ->required()
                         ->email(),
                     Forms\Components\TextInput::make('password')
-                        ->required()
-                        ->password(),   
+                        ->password()
+                        ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                        ->dehydrated(fn ($state) => filled($state))
+                        ->required(fn (string $context): bool => $context === 'create'),
                 ])
             ]);
     }
@@ -60,12 +67,14 @@ class UserResource extends Resource
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('role.tag')
+                    ->badge()
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('team.name')
+                    ->badge()
                     ->sortable()
                     ->searchable(),
-                
+
             ])
             ->filters([
                 //
@@ -74,9 +83,9 @@ class UserResource extends Resource
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make()
-                ->before(function (User $record){
-                    Storage::delete('public/' . $record->avatar);
-                }),
+                    ->before(function (User $record) {
+                        Storage::delete('public/' . $record->avatar);
+                    }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

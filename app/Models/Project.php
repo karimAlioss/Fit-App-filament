@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\AmaoType;
-use App\Enums\AmoeType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

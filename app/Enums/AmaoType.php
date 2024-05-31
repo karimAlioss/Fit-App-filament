@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Enums;
+
 use Filament\Support\Contracts\HasLabel;
 
-enum AmaoType: string implements HasLabel {
-    
+enum AmaoType: string implements HasLabel
+{
     case Choix1 = 'choix 1';
     case Choix2 = 'choix 2';
     case Choix3 = 'choix 3';
