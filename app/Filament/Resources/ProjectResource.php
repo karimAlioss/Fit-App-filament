@@ -91,6 +91,9 @@ class ProjectResource extends Resource
                 Tables\Columns\TextColumn::make('team.name')
                     ->sortable()
                     ->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->date('d-m-Y')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('statu.tag')
                     ->sortable()
                     ->searchable()

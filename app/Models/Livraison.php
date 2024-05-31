@@ -11,6 +11,19 @@ class Livraison extends Model
 {
     use HasFactory;
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($livraison) {
+            // Ensure that the lotissement relationship is loaded
+            $livraison->load('lotissement.project');
+
+            // Generate the reference
+            $livraison->reference = 'LIV-' . $livraison->lotissement->project->id . $livraison->lotissement->id;
+        });
+    }
+
     public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);
