@@ -20,6 +20,8 @@ class ProjectResource extends Resource
 
     protected static ?string $navigationGroup = 'Managements';
 
+    protected static ?string $recordTitleAttribute = 'titre';
+
 
     public static function form(Form $form): Form
     {

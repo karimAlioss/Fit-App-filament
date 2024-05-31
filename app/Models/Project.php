@@ -13,7 +13,7 @@ class Project extends Model
 
     public function lotissements(): HasMany
     {
-        return $this->hasMany(Lotissements::class);
+        return $this->hasMany(Lotissement::class);
     }
 
     public function type(): BelongsTo
