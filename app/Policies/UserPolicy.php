@@ -12,10 +12,10 @@ class UserPolicy
         //
     }
 
-    /*public function viewAny(): bool
+    public function viewAny(): bool
     {
         return auth()->user()->role->tag === 'Admin';
-    }*/
+    }
 
     public function create(): bool
     {

@@ -32,3 +32,6 @@ Access the storage folder publically
 Start the development server
 `php artisan serve`
 
+Admin should have the role id
+`1`
+
