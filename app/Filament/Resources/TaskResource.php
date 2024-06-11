@@ -47,6 +47,7 @@ class TaskResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->striped()
             ->groups([
                 Tables\Grouping\Group::make('statu.tag')
                     ->collapsible()

@@ -58,6 +58,7 @@ class UserResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->striped()
             ->columns([
                 Tables\Columns\ImageColumn::make('avatar')
                     ->circular(),

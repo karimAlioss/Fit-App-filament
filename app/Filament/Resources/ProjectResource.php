@@ -11,6 +11,10 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use App\Enums\AmaoType;
 use App\Enums\AmoeType;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 
 class ProjectResource extends Resource
 {
@@ -65,11 +69,9 @@ class ProjectResource extends Resource
                         ->native(false)
                         ->searchable()
                         ->preload(),
-                    Forms\Components\Select::make('team_id')
-                        ->relationship('team', 'name')
-                        ->native(false)
-                        ->searchable()
-                        ->preload(),
+                    Forms\Components\Hidden::make('team_id')
+                        ->default(fn () => Auth::user()->team_id)
+                        ->required(),
                 ])
             ]);
     }
@@ -77,8 +79,10 @@ class ProjectResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->striped()
             ->groups([
                 Tables\Grouping\Group::make('statu.tag')
+                    ->label('Status')
                     ->collapsible()
             ])
             ->columns([
@@ -107,7 +111,7 @@ class ProjectResource extends Resource
                     ->html(),
             ])
             ->filters([
-                //
+                // Add any necessary filters here
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -121,10 +125,15 @@ class ProjectResource extends Resource
             ]);
     }
 
+    protected static function getTableQuery(): Builder
+    {
+        return parent::getTableQuery();
+    }
+
     public static function getRelations(): array
     {
         return [
-            //
+            // Define any necessary relationships here
         ];
     }
 

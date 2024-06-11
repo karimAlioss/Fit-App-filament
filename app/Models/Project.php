@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\TeamScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,6 +11,20 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Project extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'titre',
+        'description',
+        'amao',
+        'amoe',
+        'type_id',
+        'method_id',
+        'sponsor_id',
+        'prestataire_id',
+        'statu_id',
+        'team_id',
+        'created_at',
+    ];
 
     public function lotissements(): HasMany
     {
@@ -44,5 +59,10 @@ class Project extends Model
     public function team(): BelongsTo
     {
         return $this->belongsTo(Team::class);
+    }
+
+    protected static function booted()
+    {
+        static::addGlobalScope(new TeamScope);
     }
 }

@@ -47,8 +47,10 @@ class LivraisonResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->striped()
             ->groups([
                 Tables\Grouping\Group::make('statu.tag')
+                    ->label('Status')
                     ->collapsible()
             ])
             ->columns([
