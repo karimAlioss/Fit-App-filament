@@ -16,7 +16,7 @@ class TeamScope implements Scope
     {
         $user = Auth::user();
 
-        if ($user) {
+        if ($user && $user->role_id !== 1) {
             $builder->where('team_id', $user->team_id);
         }
     }
