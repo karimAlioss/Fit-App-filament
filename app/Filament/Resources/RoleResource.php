@@ -36,6 +36,7 @@ class RoleResource extends Resource
                 Tables\Columns\TextColumn::make('id')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('tag')
+                    ->badge()
                     ->sortable()
                     ->searchable(),
             ])
