@@ -19,14 +19,14 @@ class MethodPolicy
         return auth()->user()->role->tag === 'Admin';
     }*/
 
-    public function create(): bool
+    public function create(User $user): bool
     {
-        return auth()->user()->role->tag === 'Admin';
+        return in_array($user->role->tag, ['Admin', 'Manager']);
     }
 
-    public function update(): bool
+    public function update(User $user): bool
     {
-        return auth()->user()->role->tag === 'Admin';
+        return in_array($user->role->tag, ['Admin', 'Manager']);
     }
 
     public function delete(): bool

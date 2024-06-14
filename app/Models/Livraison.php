@@ -49,7 +49,9 @@ class Livraison extends Model
 
             if ($user && $user->role_id !== 1) {
                 $builder->whereHas('lotissement.project', function (Builder $query) use ($user) {
-                    $query->where('team_id', $user->team_id);
+                    $query->whereHas('team', function (Builder $teamQuery) use ($user) {
+                        $teamQuery->whereIn('teams.id', $user->teams->pluck('id'));
+                    });
                 });
             }
         });

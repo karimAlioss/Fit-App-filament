@@ -17,6 +17,20 @@ class StatuResource extends Resource
     protected static ?string $navigationGroup = 'Settings';
     protected static ?int $navigationSort = 9;
 
+    // Define the helper function within the class
+    public static function hexToRgba($hex, $alpha = 1)
+    {
+        $hex = str_replace('#', '', $hex);
+        $length = strlen($hex);
+        $rgba = [
+            'r' => hexdec($length === 6 ? substr($hex, 0, 2) : ($length === 3 ? str_repeat(substr($hex, 0, 1), 2) : 0)),
+            'g' => hexdec($length === 6 ? substr($hex, 2, 2) : ($length === 3 ? str_repeat(substr($hex, 1, 1), 2) : 0)),
+            'b' => hexdec($length === 6 ? substr($hex, 4, 2) : ($length === 3 ? str_repeat(substr($hex, 2, 1), 2) : 0)),
+            'a' => $alpha
+        ];
+        return "rgba({$rgba['r']}, {$rgba['g']}, {$rgba['b']}, {$rgba['a']})";
+    }
+
 
     public static function form(Form $form): Form
     {
@@ -42,7 +56,17 @@ class StatuResource extends Resource
                     ->sortable()
                     ->searchable()
                     ->formatStateUsing(function ($state, $record) {
-                        return "<span style='background-color: {$record->color}; color: #fff; padding: 0.2em 0.4em; border-radius: 0.25em;display: inline-block; width: 80px; text-align: center;'>{$state}</span>";
+                        $backgroundColor = self::hexToRgba($record->color, 0.7);
+                        $borderColor = self::hexToRgba($record->color, 1);
+                        return "<span style='background-color: {$backgroundColor}; 
+                        border: 1px solid {$borderColor}; 
+                        color: #fff; 
+                        font-size: .8rem;
+                        padding: 0.2em 0.4em; 
+                        border-radius: 0.25em; 
+                        display: inline-block; 
+                        width: 80px; 
+                        text-align: center;'>{$state}</span>";
                     })
                     ->html(),
                 Tables\Columns\ColorColumn::make('color'),

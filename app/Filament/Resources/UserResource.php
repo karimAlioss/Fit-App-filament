@@ -38,9 +38,10 @@ class UserResource extends Resource
                         ->native(false)
                         ->searchable()
                         ->preload(),
-                    Forms\Components\Select::make('team_id') //Fetching Team's data
-                        ->relationship('team', 'name')
+                    Forms\Components\Select::make('teams')
+                        ->relationship('teams', 'name')
                         ->native(false)
+                        ->multiple()
                         ->searchable()
                         ->preload(),
                     Forms\Components\TextInput::make('email')
@@ -69,7 +70,7 @@ class UserResource extends Resource
                     ->badge()
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('team.name')
+                Tables\Columns\TextColumn::make('teams.name')
                     ->badge()
                     ->sortable()
                     ->searchable(),

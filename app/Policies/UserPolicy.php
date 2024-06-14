@@ -2,6 +2,8 @@
 
 namespace App\Policies;
 
+use App\Models\User;
+
 class UserPolicy
 {
     /**
@@ -12,14 +14,14 @@ class UserPolicy
         //
     }
 
-    public function viewAny(): bool
+    public function viewAny(User $user): bool
     {
-        return auth()->user()->role->tag === 'Admin';
+        return in_array($user->role->tag, ['Admin', 'Manager']);
     }
 
-    public function create(): bool
+    public function create(User $user): bool
     {
-        return auth()->user()->role->tag === 'Admin';
+        return in_array($user->role->tag, ['Admin', 'Manager']);
     }
 
     public function update(): bool

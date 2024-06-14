@@ -14,14 +14,14 @@ class StatuPolicy
         //
     }
 
-    public function viewAny(): bool
+    public function viewAny(User $user): bool
     {
-        return auth()->user()->role->tag === 'Admin';
+        return in_array($user->role->tag, ['Admin', 'Manager']);
     }
 
-    public function create(): bool
+    public function create(User $user): bool
     {
-        return auth()->user()->role->tag === 'Admin';
+        return in_array($user->role->tag, ['Admin', 'Manager']);
     }
 
     public function update(): bool

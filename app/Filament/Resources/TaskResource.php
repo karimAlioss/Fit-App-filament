@@ -18,6 +18,20 @@ class TaskResource extends Resource
     protected static ?string $recordTitleAttribute = 'titre';
     protected static ?int $navigationSort = 4;
 
+    // Define the helper function within the class
+    public static function hexToRgba($hex, $alpha = 1)
+    {
+        $hex = str_replace('#', '', $hex);
+        $length = strlen($hex);
+        $rgba = [
+            'r' => hexdec($length === 6 ? substr($hex, 0, 2) : ($length === 3 ? str_repeat(substr($hex, 0, 1), 2) : 0)),
+            'g' => hexdec($length === 6 ? substr($hex, 2, 2) : ($length === 3 ? str_repeat(substr($hex, 1, 1), 2) : 0)),
+            'b' => hexdec($length === 6 ? substr($hex, 4, 2) : ($length === 3 ? str_repeat(substr($hex, 2, 1), 2) : 0)),
+            'a' => $alpha
+        ];
+        return "rgba({$rgba['r']}, {$rgba['g']}, {$rgba['b']}, {$rgba['a']})";
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -50,6 +64,7 @@ class TaskResource extends Resource
             ->striped()
             ->groups([
                 Tables\Grouping\Group::make('statu.tag')
+                    ->label('Status')
                     ->collapsible()
             ])
             ->columns([
@@ -67,7 +82,18 @@ class TaskResource extends Resource
                     ->searchable()
                     ->formatStateUsing(function ($state, $record) {
                         $color = $record->statu->color ?? '#000';
-                        return "<span style='background-color: {$color}; color: #fff; padding: 0.2em 0.4em; border-radius: 0.25em;display: inline-block; width: 80px; text-align: center;'>{$state}</span>";
+                        $backgroundColor = ProjectResource::hexToRgba($color, 0.7);
+                        $borderColor = ProjectResource::hexToRgba($color, 1);
+
+                        return "<span style='background-color: {$backgroundColor}; 
+                        border: 1px solid {$borderColor}; 
+                        color: #fff; 
+                        font-size: .8rem;
+                        padding: 0.2em 0.4em; 
+                        border-radius: 0.25em; 
+                        display: inline-block; 
+                        width: 80px; 
+                        text-align: center;'>{$state}</span>";
                     })
                     ->html(),
             ])
