@@ -75,21 +75,19 @@ class ProjectResource extends Resource
                         ->native(false)
                         ->searchable()
                         ->preload(),
+                    Forms\Components\Select::make('teams')
+                        ->relationship('teams', 'name')
+                        ->native(false)
+                        ->multiple()
+                        ->searchable()
+                        ->preload(),
                     Forms\Components\Select::make('statu_id')
                         ->relationship('statu', 'tag')
                         ->native(false)
                         ->searchable()
                         ->preload(),
                 ]),
-            ])
-            ->afterCreate(function (Project $record) {
-                $user = Auth::user();
-                $record->teams()->sync($user->teams->pluck('id'));
-            })
-            ->afterSave(function (Project $record) {
-                $user = Auth::user();
-                $record->teams()->sync($user->teams->pluck('id'));
-            });
+            ]);
     }
 
     public static function table(Table $table): Table
@@ -114,7 +112,7 @@ class ProjectResource extends Resource
                 Tables\Columns\TextColumn::make('amoe')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('team.name')
+                Tables\Columns\TextColumn::make('teams.name')
                     ->badge()
                     ->sortable()
                     ->searchable(),

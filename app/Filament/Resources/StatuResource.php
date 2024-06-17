@@ -59,13 +59,13 @@ class StatuResource extends Resource
                         $backgroundColor = self::hexToRgba($record->color, 0.7);
                         $borderColor = self::hexToRgba($record->color, 1);
                         return "<span style='background-color: {$backgroundColor}; 
-                        border: 1px solid {$borderColor}; 
+                        border: 1.5px solid {$borderColor}; 
                         color: #fff; 
                         font-size: .8rem;
                         padding: 0.2em 0.4em; 
                         border-radius: 0.25em; 
                         display: inline-block; 
-                        width: 80px; 
+                        width: 82px; 
                         text-align: center;'>{$state}</span>";
                     })
                     ->html(),

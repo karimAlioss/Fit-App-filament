@@ -57,9 +57,9 @@ class Project extends Model
         return $this->belongsTo(Statu::class);
     }
 
-    public function team(): BelongsTo
+    public function teams(): BelongsToMany
     {
-        return $this->belongsTo(Team::class);
+        return $this->belongsToMany(Team::class);
     }
 
     protected static function booted()
