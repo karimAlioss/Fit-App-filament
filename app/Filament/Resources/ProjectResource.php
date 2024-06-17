@@ -11,6 +11,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use App\Enums\AmaoType;
 use App\Enums\AmoeType;
+use App\Models\Statu;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
@@ -133,13 +134,21 @@ class ProjectResource extends Resource
                         padding: 0.2em 0.4em; 
                         border-radius: 0.25em; 
                         display: inline-block; 
-                        width: 80px; 
+                        width: 82px; 
                         text-align: center;'>{$state}</span>";
                     })
                     ->html(),
             ])
             ->filters([
-                // Add any necessary filters here
+                Tables\Filters\SelectFilter::make('statu_id')
+                    ->options(fn () => Statu::pluck('tag', 'id'))
+                    ->label('Status')
+                    ->multiple()
+                    ->preload(),
+                Tables\Filters\SelectFilter::make('teams')
+                    ->relationship('teams', 'name')
+                    ->multiple()
+                    ->preload()
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

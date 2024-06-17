@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\LivraisonResource\Pages;
 use App\Models\Livraison;
+use App\Models\Statu;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -95,13 +96,15 @@ class LivraisonResource extends Resource
                         padding: 0.2em 0.4em; 
                         border-radius: 0.25em; 
                         display: inline-block; 
-                        width: 80px; 
+                        width: 82px; 
                         text-align: center;'>{$state}</span>";
                     })
                     ->html(),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('statu_id')
+                    ->label('Status')
+                    ->options(fn () => Statu::pluck('tag', 'id'))
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

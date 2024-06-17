@@ -69,7 +69,6 @@ class StatuResource extends Resource
                         text-align: center;'>{$state}</span>";
                     })
                     ->html(),
-                Tables\Columns\ColorColumn::make('color'),
             ])
             ->filters([
                 //

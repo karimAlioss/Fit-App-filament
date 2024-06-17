@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\LotissementResource\Pages;
 use App\Models\Lotissement;
+use App\Models\Statu;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -92,13 +93,17 @@ class LotissementResource extends Resource
                         padding: 0.2em 0.4em; 
                         border-radius: 0.25em; 
                         display: inline-block; 
-                        width: 80px; 
+                        width: 82px; 
                         text-align: center;'>{$state}</span>";
                     })
                     ->html(),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('statu_id')
+                    ->options(fn () => Statu::pluck('tag', 'id'))
+                    ->label('Status')
+                    ->multiple()
+                    ->preload(),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

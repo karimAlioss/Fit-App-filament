@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
+use App\Models\Team;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -77,7 +78,10 @@ class UserResource extends Resource
 
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('teams')
+                    ->relationship('teams', 'name')
+                    ->multiple()
+                    ->preload()
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
