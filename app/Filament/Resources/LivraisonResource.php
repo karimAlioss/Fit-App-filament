@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\LivraisonResource\Pages;
 use App\Models\Livraison;
+use App\Models\Statu;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -101,7 +102,9 @@ class LivraisonResource extends Resource
                     ->html(),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('statu_id')
+                    ->label('Status')
+                    ->options(fn () => Statu::pluck('tag', 'id'))
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

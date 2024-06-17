@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TaskResource\Pages;
+use App\Models\Statu;
 use App\Models\Task;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -98,7 +99,9 @@ class TaskResource extends Resource
                     ->html(),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('statu_id')
+                    ->label('Status')
+                    ->options(fn () => Statu::pluck('tag', 'id'))
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

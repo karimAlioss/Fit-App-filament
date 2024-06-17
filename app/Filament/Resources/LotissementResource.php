@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\LotissementResource\Pages;
 use App\Models\Lotissement;
+use App\Models\Statu;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -98,7 +99,11 @@ class LotissementResource extends Resource
                     ->html(),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('statu_id')
+                    ->options(fn () => Statu::pluck('tag', 'id'))
+                    ->label('Status')
+                    ->multiple()
+                    ->preload(),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
