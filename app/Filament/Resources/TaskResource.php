@@ -92,7 +92,7 @@ class TaskResource extends Resource
                         padding: 0.2em 0.4em; 
                         border-radius: 0.25em; 
                         display: inline-block; 
-                        width: 80px; 
+                        width: 82px; 
                         text-align: center;'>{$state}</span>";
                     })
                     ->html(),
